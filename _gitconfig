@@ -1,15 +1,27 @@
-# This is Git's per-user configuration file.
+# ============================================================================
+# .gitconfig 
+# ============================================================================
+
+# Configuração individual dos repositórios 
+# $ git config user.name "Chaua Queirolo"
+# $ git config user.email chaua@users.noreply.github.com
 [user]
 	name = Chaua Queirolo
 	email = chaua@users.noreply.github.com
 [push]
 	default = simple
 [alias]
+    # Mensagem de log customizada
     lg = !git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit | emojify
     ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    ls = log --graph --pretty=format:'commit: %C(bold red)%h%Creset %C(red)<%H>%Creset %C(bold magenta)%d %Creset%ndate: %C(bold yellow)%cd %Creset%C(yellow)%cr%Creset%nauthor: %C(bold blue)%an%Creset %C(blue)<%ae>%Creset%n%C(cyan)%s%n%Creset'
 
+    # Atalhos
     st = status
+	co = checkout
+	br = branch
 
+    # Mensagens de commit customizadas
     cini = "!f() { git commit -m \":tada: Importação inicial\"; }; f"
     cnew = "!f() { git commit -m \":sparkles: $@\"; }; f"
     cfix = "!f() { git commit -m \":bug: $@\"; }; f"
@@ -18,3 +30,16 @@
     ctst = "!f() { git commit -m \":white_check_mark: $@\"; }; f"
     cdel = "!f() { git commit -m \":no_entry: $@\"; }; f"
 
+    # Criação de tags
+    tg = "! git tag | sort -n -t '.' -k2,2 -k3,3 | tail -3"
+    ntag = "!\
+        PRE=`git tag | sort -n -t '.' -k2,2 -k3,3 | tail -1 | cut -d '.' -f-2`; \
+        POS=$(echo $((`git tag | sort -n -t '.' -k2,2 -k3,3 | tail -1 | cut -d '.' -f3` + 1))); \
+        TAG=$PRE.$POS;\
+        echo $TAG;\
+        git tag -a $TAG;\
+        git push origin --tags;"
+
+    # Criação de uma nova release
+    nrlz = "!f() { git commit -m \":rocket: $@\"; git push; git ntag; }; f"
+ 
