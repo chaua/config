@@ -1,0 +1,20 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Chaua Queirolo
+	email = chaua@users.noreply.github.com
+[push]
+	default = simple
+[alias]
+    lg = !git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit | emojify
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+    st = status
+
+    cini = "!f() { git commit -m \":tada: Importação inicial\"; }; f"
+    cnew = "!f() { git commit -m \":sparkles: $@\"; }; f"
+    cfix = "!f() { git commit -m \":bug: $@\"; }; f"
+    cdoc = "!f() { git commit -m \":book: $@\"; }; f"
+    crlz = "!f() { git commit -m \":rocket: $@\"; }; f"
+    ctst = "!f() { git commit -m \":white_check_mark: $@\"; }; f"
+    cdel = "!f() { git commit -m \":no_entry: $@\"; }; f"
+
